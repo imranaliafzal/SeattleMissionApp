@@ -27,6 +27,7 @@ public class VenueDetailsActivity extends AppCompatActivity implements OnMapRead
     GoogleMap gmap;
     Models.Venue venue;
     VenueDetailsViewModel mVenueDetailsViewModel;
+    TextView tvName, tvDescription, tvContact, tvLocation, tvVerified, tvUrl, tvHours, tvPopular, tvMenu, tvShortUrl, tvCanonicalUrl;
 
 
     private static final String MAP_VIEW_BUNDLE_KEY = "AIzaSyDzxeuSAWPhkJJhr4iXp-DZYhTWaBkuLE0";
@@ -35,6 +36,18 @@ public class VenueDetailsActivity extends AppCompatActivity implements OnMapRead
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_venue_details);
+
+        tvName = findViewById(R.id.tv_name);
+        tvDescription = findViewById(R.id.tv_description);
+        tvContact = findViewById(R.id.tv_contact);
+        tvLocation = findViewById(R.id.tv_location);
+        tvVerified = findViewById(R.id.tv_verified);
+        tvUrl = findViewById(R.id.tv_url);
+        tvHours = findViewById(R.id.tv_hours);
+        tvPopular = findViewById(R.id.tv_popular);
+        tvMenu = findViewById(R.id.tv_menu);
+        tvShortUrl = findViewById(R.id.tv_short_url);
+        tvCanonicalUrl = findViewById(R.id.tv_canonical_url);
 
         retrieveExtras();
 
@@ -63,8 +76,17 @@ public class VenueDetailsActivity extends AppCompatActivity implements OnMapRead
 
         mVenueDetailsViewModel = ViewModelProviders.of(this).get(VenueDetailsViewModel.class);
         mVenueDetailsViewModel.getVenueDetailsResponse(venue.getId()).observe(this, pVenueDetailsResponse  -> {
-
-
+            pVenueDetailsResponse.getName();
+            pVenueDetailsResponse.getDescription();
+            pVenueDetailsResponse.getContact();
+            pVenueDetailsResponse.getLocation();
+            pVenueDetailsResponse.getVerified();
+            pVenueDetailsResponse.getUrl();
+            pVenueDetailsResponse.getHours();
+            pVenueDetailsResponse.getPopular();
+            pVenueDetailsResponse.getMenu();
+            pVenueDetailsResponse.getShortUrl();
+            pVenueDetailsResponse.getCanonicalUrl();
         });
 
         /*FourSquareWebService.getInstance().venueDetails(venue.getId()).enqueue(new Callback<ResponseBody>() {

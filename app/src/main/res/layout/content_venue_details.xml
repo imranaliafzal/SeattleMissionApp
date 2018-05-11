@@ -17,7 +17,7 @@
         />
 
     <TextView
-        android:id="@+id/tv_large_text"
+        android:id="@+id/tv_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
@@ -52,28 +52,36 @@
         />
 
     <TextView
-        android:id="@+id/tv_large_text"
+        android:id="@+id/tv_hours"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
         />
 
     <TextView
-        android:id="@+id/tv_large_text"
+        android:id="@+id/tv_popular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
         />
 
     <TextView
-        android:id="@+id/tv_large_text"
+        android:id="@+id/tv_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
         />
 
     <TextView
-        android:id="@+id/tv_large_text"
+        android:id="@+id/tv_short_url"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_canonical_url"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
