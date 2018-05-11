@@ -18,7 +18,7 @@ import com.imranaliafzal.seattlemission.seattlemissionapp.model.VenueSearchRespo
 
 import java.util.List;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnInfoWindowClickListener, GoogleMap.OnInfoWindowCloseListener, GoogleMap.OnInfoWindowLongClickListener {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
 
     private GoogleMap mMap;
 
@@ -51,7 +51,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        mMap.setOnMarkerClickListener(this);
+        mMap.setOnInfoWindowClickListener(this);
+
         List<VenueSearchResponse.Venue> lVenues = this.mVenueSearchResponse.getResponse().getVenues();
         for(VenueSearchResponse.Venue v : lVenues){
 
@@ -88,12 +89,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return i;
     }
 
-
-    @Override
-    public boolean onMarkerClick(Marker pMarker) {
-        return false;
-    }
-
     @Override
     public void onInfoWindowClick(Marker pMarker) {
         if(pMarker.getTag() != null) {
@@ -103,21 +98,4 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    @Override
-    public void onInfoWindowClose(Marker pMarker) {
-        if(pMarker.getTag() != null) {
-            VenueSearchResponse.Venue lVenue = (VenueSearchResponse.Venue) pMarker.getTag();
-            Intent lIntent = VenueDetailsActivity.newIntent(this, lVenue);
-            startActivity(lIntent);
-        }
-    }
-
-    @Override
-    public void onInfoWindowLongClick(Marker pMarker) {
-        if(pMarker.getTag() != null) {
-            VenueSearchResponse.Venue lVenue = (VenueSearchResponse.Venue) pMarker.getTag();
-            Intent lIntent = VenueDetailsActivity.newIntent(this, lVenue);
-            startActivity(lIntent);
-        }
-    }
 }
