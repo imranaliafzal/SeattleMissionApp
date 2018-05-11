@@ -15,10 +15,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * HomeAwayFromHome
+ * SeattleMission
  * <p>
  * Created by iafzal on 5/10/18.
- * Copyright © 2018 Spendlabs Inc. All rights reserved.
+ * Copyright © 2018 Imran Afzal All rights reserved.
  */
 public class MainViewModel extends AndroidViewModel {
 

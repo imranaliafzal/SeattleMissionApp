@@ -1,10 +1,10 @@
 package com.imranaliafzal.seattlemission.seattlemissionapp.utils;
 
 /**
- * HomeAwayFromHome
+ * SeattleMission
  * <p>
  * Created by iafzal on 5/11/18.
- * Copyright © 2018 Spendlabs Inc. All rights reserved.
+ * Copyright © 2018 Imran Afzal All rights reserved.
  */
 public class Constants {
     public static final Double SEATTLE_CENTER_LAT = 47.608013;

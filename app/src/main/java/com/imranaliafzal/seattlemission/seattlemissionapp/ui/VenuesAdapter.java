@@ -29,7 +29,7 @@ import retrofit2.Response;
  * MovieApp
  * <p>
  * Created by iafzal on 5/8/18.
- * Copyright © 2018 Spendlabs Inc. All rights reserved.
+ * Copyright © 2018 Imran Afzal All rights reserved.
  */
 public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenueViewHolder> {
 

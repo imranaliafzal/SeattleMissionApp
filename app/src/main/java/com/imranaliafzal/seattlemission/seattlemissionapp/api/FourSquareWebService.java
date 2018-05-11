@@ -13,10 +13,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * HomeAwayFromHome
+ * SeattleMission
  * <p>
  * Created by iafzal on 5/10/18.
- * Copyright © 2018 Spendlabs Inc. All rights reserved.
+ * Copyright © 2018 Imran Afzal All rights reserved.
  */
 public class FourSquareWebService implements WebService {
     private static final String baseUrl = "https://api.foursquare.com";

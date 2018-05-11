@@ -8,10 +8,10 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 /**
- * HomeAwayFromHome
+ * SeattleMission
  * <p>
  * Created by iafzal on 5/11/18.
- * Copyright © 2018 Spendlabs Inc. All rights reserved.
+ * Copyright © 2018 Imran Afzal All rights reserved.
  */
 public class Util {
 

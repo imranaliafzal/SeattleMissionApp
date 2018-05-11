@@ -10,10 +10,10 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
- * HomeAwayFromHome
+ * SeattleMission
  * <p>
  * Created by iafzal on 5/10/18.
- * Copyright © 2018 Spendlabs Inc. All rights reserved.
+ * Copyright © 2018 Imran Afzal All rights reserved.
  */
 public interface WebService {
 
