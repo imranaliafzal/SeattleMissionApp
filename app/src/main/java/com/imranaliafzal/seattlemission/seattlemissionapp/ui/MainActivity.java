@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.imranaliafzal.seattlemission.seattlemissionapp.R;
-import com.imranaliafzal.seattlemission.seattlemissionapp.model.VenueSearchResponse;
+import com.imranaliafzal.seattlemission.seattlemissionapp.model.Models.VenueSearchResponse;
 import com.imranaliafzal.seattlemission.seattlemissionapp.viewmodel.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {

@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.imranaliafzal.seattlemission.seattlemissionapp.R;
 import com.imranaliafzal.seattlemission.seattlemissionapp.api.FourSquareWebService;
-import com.imranaliafzal.seattlemission.seattlemissionapp.model.VenueSearchResponse;
+import com.imranaliafzal.seattlemission.seattlemissionapp.model.Models;
 import com.imranaliafzal.seattlemission.seattlemissionapp.utils.Constants;
 import com.imranaliafzal.seattlemission.seattlemissionapp.utils.Util;
 
@@ -33,9 +33,9 @@ import retrofit2.Response;
  */
 public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenueViewHolder> {
 
-    private List<VenueSearchResponse.Venue> mVenues;
+    private List<Models.Venue> mVenues;
 
-    public VenuesAdapter(List<VenueSearchResponse.Venue> pVenues) {
+    public VenuesAdapter(List<Models.Venue> pVenues) {
         mVenues = pVenues;
 
     }
@@ -51,7 +51,7 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenueViewH
     public void onBindViewHolder(@NonNull VenueViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        VenueSearchResponse.Venue lVenue = mVenues.get(position);
+        Models.Venue lVenue = mVenues.get(position);
         if (lVenue != null) {
             holder.bindTo(lVenue);
         } else {
@@ -88,21 +88,21 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenueViewH
             this.mCardView = itemView.findViewById(R.id.cardView);
         }
 
-        public void bindTo(VenueSearchResponse.Venue pVenue) {
+        public void bindTo(Models.Venue pVenue) {
 
             title.setText(pVenue.getName());
             category.setText(Util.categoryListToDisplay(pVenue.getCategories()));
             address.setText(pVenue.getLocation().getAddress());
-            distance.setText(Util.distanceFromSeattleCenterInMiles(pVenue.getLocation().getLat(), pVenue.getLocation().getLng()));
+            distance.setText(Util.distanceFromSeattleCenterInMiles(pVenue.getLocation().getLat(), pVenue.getLocation().getLng())+" mi");
 
 
-            FourSquareWebService.getInstance().fetchPhotoList(pVenue.getId(), Constants.CLIENT_ID, Constants.CLIENT_SECRET, Constants.V, "venue", 1, 1).enqueue(new Callback<VenueSearchResponse.VenuePhotosResponse>() {
+            FourSquareWebService.getInstance().fetchPhotoList(pVenue.getId(), Constants.CLIENT_ID, Constants.CLIENT_SECRET, Constants.V, "venue", 1, 1).enqueue(new Callback<Models.VenuePhotosResponse>() {
                 @Override
-                public void onResponse(Call<VenueSearchResponse.VenuePhotosResponse> call, Response<VenueSearchResponse.VenuePhotosResponse> response) {
+                public void onResponse(Call<Models.VenuePhotosResponse> call, Response<Models.VenuePhotosResponse> response) {
                     if (response.isSuccessful() && response.body() != null && response.body().getResponse().getPhotos().getItems() != null && response.body().getResponse().getPhotos().getItems().size() > 0) {
 
                         //now fetch the image
-                        VenueSearchResponse.PhotoItem lPhotoItem = response.body().getResponse().getPhotos().getItems().get(0);
+                        Models.PhotoItem lPhotoItem = response.body().getResponse().getPhotos().getItems().get(0);
                         String prefix = lPhotoItem.getPrefix();
                         String suffix = lPhotoItem.getSuffix();
                         FourSquareWebService.getInstance().fetchPhoto(prefix, suffix).enqueue(new Callback<ResponseBody>() {
@@ -122,7 +122,7 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenueViewH
                 }
 
                 @Override
-                public void onFailure(Call<VenueSearchResponse.VenuePhotosResponse> call, Throwable t) {
+                public void onFailure(Call<Models.VenuePhotosResponse> call, Throwable t) {
                     t.getCause();
                 }
             });

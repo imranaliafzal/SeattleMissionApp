@@ -14,7 +14,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.imranaliafzal.seattlemission.seattlemissionapp.R;
-import com.imranaliafzal.seattlemission.seattlemissionapp.model.VenueSearchResponse;
+import com.imranaliafzal.seattlemission.seattlemissionapp.model.Models;
+import com.imranaliafzal.seattlemission.seattlemissionapp.model.Models.VenueSearchResponse;
 
 import java.util.List;
 
@@ -53,8 +54,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.setOnInfoWindowClickListener(this);
 
-        List<VenueSearchResponse.Venue> lVenues = this.mVenueSearchResponse.getResponse().getVenues();
-        for(VenueSearchResponse.Venue v : lVenues){
+        List<Models.Venue> lVenues = this.mVenueSearchResponse.getResponse().getVenues();
+        for(Models.Venue v : lVenues){
 
             LatLng lLatLng = new LatLng(Double.valueOf(v.getLocation().getLat()),
                     Double.valueOf(v.getLocation().getLng()) );
@@ -75,7 +76,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void retrieveExtras() {
         if (getIntent().getExtras() != null) {
             Bundle extras = getIntent().getExtras();
-            if (extras.containsKey("com.imran.ali.afzal.seattlemission.venuesearchresponse")) {
+            if (extras.containsKey("com.imran.ali.afzal.seattlemission.Models.VenueSearchResponse")) {
                 this.mVenueSearchResponse = (VenueSearchResponse) extras.getSerializable("com.imran.ali.afzal.seattlemission.venuesearchresponse");
             }
         }
@@ -92,7 +93,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onInfoWindowClick(Marker pMarker) {
         if(pMarker.getTag() != null) {
-            VenueSearchResponse.Venue lVenue = (VenueSearchResponse.Venue) pMarker.getTag();
+            Models.Venue lVenue = (Models.Venue) pMarker.getTag();
             Intent lIntent = VenueDetailsActivity.newIntent(this, lVenue);
             startActivity(lIntent);
         }

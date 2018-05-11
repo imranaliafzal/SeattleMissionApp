@@ -3,7 +3,7 @@ package com.imranaliafzal.seattlemission.seattlemissionapp.repo;
 import android.arch.lifecycle.MutableLiveData;
 
 import com.imranaliafzal.seattlemission.seattlemissionapp.api.FourSquareWebService;
-import com.imranaliafzal.seattlemission.seattlemissionapp.model.VenueSearchResponse;
+import com.imranaliafzal.seattlemission.seattlemissionapp.model.Models.VenueSearchResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;

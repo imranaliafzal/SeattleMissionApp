@@ -11,25 +11,13 @@ import lombok.Value;
  * Created by iafzal on 5/10/18.
  * Copyright © 2018 Spendlabs Inc. All rights reserved.
  */
-public class VenueSearchResponse implements Serializable{
-    public Meta getMeta() {
-        return meta;
-    }
+public class Models implements Serializable{
 
-    public void setMeta(Meta pMeta) {
-        meta = pMeta;
+    @Value
+    public class VenueSearchResponse implements Serializable{
+        Meta meta;
+        VenuesResponse response;
     }
-
-    public VenuesResponse getResponse() {
-        return response;
-    }
-
-    public void setResponse(VenuesResponse pResponse) {
-        response = pResponse;
-    }
-
-    Meta meta;
-    VenuesResponse response;
 
     @Value
     public class Meta implements Serializable{
@@ -182,7 +170,6 @@ public class VenueSearchResponse implements Serializable{
         String prefix;
         String suffix;
     }
-
 
 }
 

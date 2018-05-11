@@ -1,4 +1,4 @@
-package com.imranaliafzal.seattlemission.seattlemissionapp;
+package com.imranaliafzal.seattlemission.seattlemissionapp.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

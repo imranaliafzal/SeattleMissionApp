@@ -7,7 +7,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
 import com.imranaliafzal.seattlemission.seattlemissionapp.api.FourSquareWebService;
-import com.imranaliafzal.seattlemission.seattlemissionapp.model.VenueSearchResponse;
+import com.imranaliafzal.seattlemission.seattlemissionapp.model.Models.VenueSearchResponse;
 import com.imranaliafzal.seattlemission.seattlemissionapp.utils.Constants;
 
 import retrofit2.Call;

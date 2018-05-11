@@ -2,7 +2,8 @@ package com.imranaliafzal.seattlemission.seattlemissionapp.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.imranaliafzal.seattlemission.seattlemissionapp.model.VenueSearchResponse;
+import com.imranaliafzal.seattlemission.seattlemissionapp.model.Models;
+import com.imranaliafzal.seattlemission.seattlemissionapp.model.Models.VenueSearchResponse;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -53,7 +54,7 @@ public class FourSquareWebService implements WebService {
 
 
     @Override
-    public Call<VenueSearchResponse.VenuePhotosResponse> fetchPhotoList(String venue_id, String client_id, String client_secret, String version, String group, Integer limit, Integer offset) {
+    public Call<Models.VenuePhotosResponse> fetchPhotoList(String venue_id, String client_id, String client_secret, String version, String group, Integer limit, Integer offset) {
         return webService.fetchPhotoList(venue_id, client_id, client_secret, version, group, limit, offset);
     }
 

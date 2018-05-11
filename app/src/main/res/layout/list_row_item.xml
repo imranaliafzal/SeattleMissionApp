@@ -24,6 +24,7 @@
             android:id="@+id/ll_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:orientation="horizontal"
             tools:layout_editor_absoluteX="15dp"
             tools:layout_editor_absoluteY="17dp">
@@ -32,6 +33,7 @@
                 android:id="@+id/iv_photo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|fill_vertical"
                 android:layout_weight="0.25"
                 android:scaleType="fitEnd"
                 app:srcCompat="@android:color/background_light"/>
@@ -48,10 +50,12 @@
                     android:id="@+id/iv_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right|end"
-                    android:adjustViewBounds="false"
-                    android:contentDescription="locationIcon"
-                    android:scaleType="fitEnd"/>
+                    android:layout_gravity="top|right|end"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_weight="1.0"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="locationIcon"/>
 
                 <TextView
                     android:id="@+id/tv_title"

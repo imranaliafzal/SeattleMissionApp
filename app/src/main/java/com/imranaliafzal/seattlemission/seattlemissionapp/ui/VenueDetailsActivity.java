@@ -18,7 +18,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.imranaliafzal.seattlemission.seattlemissionapp.R;
 import com.imranaliafzal.seattlemission.seattlemissionapp.api.FourSquareWebService;
-import com.imranaliafzal.seattlemission.seattlemissionapp.model.VenueSearchResponse;
+import com.imranaliafzal.seattlemission.seattlemissionapp.model.Models;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -29,7 +29,7 @@ public class VenueDetailsActivity extends AppCompatActivity implements OnMapRead
 
     MapView mapView;
     GoogleMap gmap;
-    VenueSearchResponse.Venue venue;
+    Models.Venue venue;
 
     private static final String MAP_VIEW_BUNDLE_KEY = "AIzaSyDzxeuSAWPhkJJhr4iXp-DZYhTWaBkuLE0";
 
@@ -101,7 +101,7 @@ public class VenueDetailsActivity extends AppCompatActivity implements OnMapRead
         gmap.setMapType(lGoogleMapOptions.getMapType());
     }
 
-    public static Intent newIntent(Context pContext, VenueSearchResponse.Venue pVenue){
+    public static Intent newIntent(Context pContext, Models.Venue pVenue){
         Intent i = new Intent(pContext, VenueDetailsActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("com.imran.ali.afzal.seattlemission.venue", pVenue);
@@ -113,7 +113,7 @@ public class VenueDetailsActivity extends AppCompatActivity implements OnMapRead
         if (getIntent().getExtras() != null) {
             Bundle extras = getIntent().getExtras();
             if (extras.containsKey("com.imran.ali.afzal.seattlemission.venue")) {
-                venue = (VenueSearchResponse.Venue) extras.getSerializable("com.imran.ali.afzal.seattlemission.venue");
+                venue = (Models.Venue) extras.getSerializable("com.imran.ali.afzal.seattlemission.venue");
             }
         }
     }

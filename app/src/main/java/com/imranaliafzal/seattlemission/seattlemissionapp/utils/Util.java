@@ -2,7 +2,7 @@ package com.imranaliafzal.seattlemission.seattlemissionapp.utils;
 
 import android.location.Location;
 
-import com.imranaliafzal.seattlemission.seattlemissionapp.model.VenueSearchResponse;
+import com.imranaliafzal.seattlemission.seattlemissionapp.model.Models;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -25,9 +25,9 @@ public class Util {
         SEATTLE_CENTER_LOCATION.setLongitude(Constants.SEATTLE_CENTER_LNG);
     }
 
-    public static String categoryListToDisplay(List<VenueSearchResponse.Category> pCategoryList){
+    public static String categoryListToDisplay(List<Models.Category> pCategoryList){
         String result = "";
-        for(VenueSearchResponse.Category c : pCategoryList){
+        for(Models.Category c : pCategoryList){
             result += c.getName();
             result += " ";
         }
