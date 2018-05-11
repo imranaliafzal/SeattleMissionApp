@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ProgressBar mProgressBar;
 
-//    private FloatingActionButton mFloatingActionButton;
+    private FloatingActionButton mFloatingActionButton;
 
     private VenueSearchResponse mVenueSearchResponse;
 
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         retrieveExtras();
 
         mProgressBar = findViewById(R.id.progress_bar);
-//        mFloatingActionButton = findViewById(R.id.floatingActionButton);
+        mFloatingActionButton = findViewById(R.id.floatingActionButton);
 
         mProgressBar.setVisibility(View.VISIBLE);
 
@@ -51,10 +52,10 @@ public class MainActivity extends AppCompatActivity {
             mProgressBar.setVisibility(View.GONE);
         });
 
-        /*mFloatingActionButton.setOnClickListener(v -> {
+        mFloatingActionButton.setOnClickListener(v -> {
             Intent i = MapsActivity.newIntent(this, mVenueSearchResponse);
             startActivity(i);
-        });*/
+        });
 
     }
 

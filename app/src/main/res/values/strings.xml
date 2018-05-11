@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SeattleMission</string>
+    <string name="app_name">Seattle Mission</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_venue_details">VenueDetailsActivity</string>
     <string name="large_text">
