@@ -171,5 +171,21 @@ public class Models implements Serializable{
         String suffix;
     }
 
+    @Value
+    public class VenueDetailsResponse{
+        String id;
+        String name;
+        Contact contact;
+        Location location;
+        Boolean verified;
+        String url;
+        String hours;
+        String popular;
+        String menu;
+        String description;
+        String shortUrl;
+        String canonicalUrl;
+    }
+
 }
 

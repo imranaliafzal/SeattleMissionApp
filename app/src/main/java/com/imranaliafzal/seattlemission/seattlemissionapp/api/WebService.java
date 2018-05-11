@@ -2,7 +2,6 @@ package com.imranaliafzal.seattlemission.seattlemissionapp.api;
 
 
 import com.imranaliafzal.seattlemission.seattlemissionapp.model.Models;
-import com.imranaliafzal.seattlemission.seattlemissionapp.model.Models.VenueSearchResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -34,7 +33,7 @@ public interface WebService {
 
 
     @GET("/v2/venues/search")
-    Call<VenueSearchResponse> searchVenue(@Query("client_id") String client_id,
+    Call<Models.VenueSearchResponse> searchVenue(@Query("client_id") String client_id,
                                           @Query("client_secret") String client_secret,
                                           @Query("near") String near,
                                           @Query("query") String query,
@@ -43,7 +42,11 @@ public interface WebService {
     );
 
     @GET("/v2/venues/{venue_id}")
-    Call<ResponseBody> venueDetails(@Path("venue_id") String venue_id);
+    Call<Models.VenueDetailsResponse> venueDetails(@Path("venue_id") String venue_id,
+                                                   @Query("client_id") String client_id,
+                                                   @Query("client_secret") String client_secret,
+                                                   @Query("v") String version
+                                                   );
 
 
 }

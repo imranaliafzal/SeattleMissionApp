@@ -1,5 +1,6 @@
 package com.imranaliafzal.seattlemission.seattlemissionapp.ui;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,19 +18,16 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.imranaliafzal.seattlemission.seattlemissionapp.R;
-import com.imranaliafzal.seattlemission.seattlemissionapp.api.FourSquareWebService;
 import com.imranaliafzal.seattlemission.seattlemissionapp.model.Models;
-
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.imranaliafzal.seattlemission.seattlemissionapp.viewmodel.VenueDetailsViewModel;
 
 public class VenueDetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     MapView mapView;
     GoogleMap gmap;
     Models.Venue venue;
+    VenueDetailsViewModel mVenueDetailsViewModel;
+
 
     private static final String MAP_VIEW_BUNDLE_KEY = "AIzaSyDzxeuSAWPhkJJhr4iXp-DZYhTWaBkuLE0";
 
@@ -62,7 +60,14 @@ public class VenueDetailsActivity extends AppCompatActivity implements OnMapRead
         mapView.onCreate(mapViewBundle);
         mapView.getMapAsync(this);
 
-        FourSquareWebService.getInstance().venueDetails(venue.getId()).enqueue(new Callback<ResponseBody>() {
+
+        mVenueDetailsViewModel = ViewModelProviders.of(this).get(VenueDetailsViewModel.class);
+        mVenueDetailsViewModel.getVenueDetailsResponse(venue.getId()).observe(this, pVenueDetailsResponse  -> {
+
+
+        });
+
+        /*FourSquareWebService.getInstance().venueDetails(venue.getId()).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 response.body();
@@ -72,7 +77,7 @@ public class VenueDetailsActivity extends AppCompatActivity implements OnMapRead
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 t.getCause();
             }
-        });
+        });*/
     }
 
     @Override

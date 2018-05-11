@@ -74,8 +74,10 @@ public class FourSquareWebService implements WebService {
     }
 
     @Override
-    public Call<ResponseBody> venueDetails(String venue_id) {
-        return webService.venueDetails(venue_id);
+    public Call<Models.VenueDetailsResponse> venueDetails(String venue_id, String client_id,
+                                                          String client_secret,
+                                                          String version) {
+        return webService.venueDetails(venue_id, client_id, client_secret, version);
     }
 
 }
