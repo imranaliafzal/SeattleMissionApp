@@ -99,7 +99,7 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenueViewH
             FourSquareWebService.getInstance().fetchPhotoList(pVenue.getId(), Constants.CLIENT_ID, Constants.CLIENT_SECRET, Constants.V, "venue", 1, 1).enqueue(new Callback<VenueSearchResponse.VenuePhotosResponse>() {
                 @Override
                 public void onResponse(Call<VenueSearchResponse.VenuePhotosResponse> call, Response<VenueSearchResponse.VenuePhotosResponse> response) {
-                    if (response.isSuccessful() && response.body() != null) {
+                    if (response.isSuccessful() && response.body() != null && response.body().getResponse().getPhotos().getItems() != null && response.body().getResponse().getPhotos().getItems().size() > 0) {
 
                         //now fetch the image
                         VenueSearchResponse.PhotoItem lPhotoItem = response.body().getResponse().getPhotos().getItems().get(0);

@@ -18,7 +18,7 @@ import com.imranaliafzal.seattlemission.seattlemissionapp.model.VenueSearchRespo
 
 import java.util.List;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnInfoWindowClickListener, GoogleMap.OnInfoWindowCloseListener, GoogleMap.OnInfoWindowLongClickListener {
 
     private GoogleMap mMap;
 
@@ -57,7 +57,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             LatLng lLatLng = new LatLng(Double.valueOf(v.getLocation().getLat()),
                     Double.valueOf(v.getLocation().getLng()) );
-              mMap.addMarker(new MarkerOptions().position(lLatLng).title(v.getName()));
+              mMap.addMarker(new MarkerOptions().position(lLatLng).title(v.getName())).setTag(v);
         }
 
         Double lat =  Double.valueOf(mVenueSearchResponse.getResponse().getGeocode().getFeature().getGeometry().getCenter().getLat());
@@ -68,10 +68,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(centerLatLng).title(tit).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)));
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(centerLatLng, 14f));
-
-        /*LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));*/
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
 
@@ -95,8 +91,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public boolean onMarkerClick(Marker pMarker) {
-        Intent lIntent = new Intent(this, VenueDetailsActivity.class);
-        startActivity(lIntent);
-        return true;
+        return false;
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker pMarker) {
+        if(pMarker.getTag() != null) {
+            VenueSearchResponse.Venue lVenue = (VenueSearchResponse.Venue) pMarker.getTag();
+            Intent lIntent = VenueDetailsActivity.newIntent(this, lVenue);
+            startActivity(lIntent);
+        }
+    }
+
+    @Override
+    public void onInfoWindowClose(Marker pMarker) {
+        if(pMarker.getTag() != null) {
+            VenueSearchResponse.Venue lVenue = (VenueSearchResponse.Venue) pMarker.getTag();
+            Intent lIntent = VenueDetailsActivity.newIntent(this, lVenue);
+            startActivity(lIntent);
+        }
+    }
+
+    @Override
+    public void onInfoWindowLongClick(Marker pMarker) {
+        if(pMarker.getTag() != null) {
+            VenueSearchResponse.Venue lVenue = (VenueSearchResponse.Venue) pMarker.getTag();
+            Intent lIntent = VenueDetailsActivity.newIntent(this, lVenue);
+            startActivity(lIntent);
+        }
     }
 }

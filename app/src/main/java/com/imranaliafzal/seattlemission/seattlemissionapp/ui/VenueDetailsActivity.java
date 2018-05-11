@@ -7,7 +7,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -38,20 +37,21 @@ public class VenueDetailsActivity extends AppCompatActivity implements OnMapRead
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_venue_details);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        retrieveExtras();
+
+        if(venue == null){
+            return;
+        }
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        findViewById(R.layout.content_venue_details);
         TextView lTextView = findViewById(R.id.tv_large_text);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());
 
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
@@ -61,8 +61,6 @@ public class VenueDetailsActivity extends AppCompatActivity implements OnMapRead
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(mapViewBundle);
         mapView.getMapAsync(this);
-
-        retrieveExtras();
 
         FourSquareWebService.getInstance().venueDetails(venue.getId()).enqueue(new Callback<ResponseBody>() {
             @Override
@@ -95,9 +93,9 @@ public class VenueDetailsActivity extends AppCompatActivity implements OnMapRead
     public void onMapReady(GoogleMap googleMap) {
         gmap = googleMap;
 
-        LatLng sydney = new LatLng(-34, 151);
-        gmap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13f));
+        LatLng lLatLng = new LatLng(Double.valueOf(venue.getLocation().getLat()), Double.valueOf(venue.getLocation().getLng()));
+        gmap.addMarker(new MarkerOptions().position(lLatLng).title(venue.getName()));
+        gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(lLatLng, 13f));
 
         GoogleMapOptions lGoogleMapOptions = new GoogleMapOptions().liteMode(true);
         gmap.setMapType(lGoogleMapOptions.getMapType());
