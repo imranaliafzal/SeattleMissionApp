@@ -7,7 +7,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -72,27 +73,25 @@ public class MainActivity extends AppCompatActivity {
                 });
 
         mTextInputEditText = findViewById(R.id.et_query);
-        mTextInputEditText.setOnKeyListener((v, keyCode, event) -> {
 
-            if(mTextInputEditText.getText().length()  > 0) {
-
-                if (event.getAction() == KeyEvent.ACTION_UP
-                        ) {
-                    showProgress();
-//              mainViewModel.getVenueSearchCompletion(mTextInputEditText.getText().toString());
-                    mainViewModel.getVenueSearchResponse(mTextInputEditText.getText().toString());
-
-                } else if (event.getAction() == KeyEvent.KEYCODE_ENTER) {
-
-                    showProgress();
-                    mainViewModel.getVenueSearchResponse(mTextInputEditText.getText().toString());
-                }
-
+        mTextInputEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
 
-            return true;
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(mTextInputEditText.getText().length()  > 0) {
+                    showProgress();
+                    mainViewModel.getVenueSearchResponse(mTextInputEditText.getText().toString());
+                }
+            }
         });
 
         mFloatingActionButton.setOnClickListener(v -> {
