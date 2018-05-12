@@ -60,6 +60,8 @@ public class Models implements Serializable{
 
     @Value
     public class Contact implements Serializable{
+        String phone;
+        String formattedPhone;
 
     }
 
@@ -73,6 +75,7 @@ public class Models implements Serializable{
         List<LabeledLatLng> labeledLatLngs;
 
         String postalCode;
+        List<String> formattedAddress;
     }
 
     @Value
@@ -144,6 +147,34 @@ public class Models implements Serializable{
         Stats stats;
         BeenHere beenHere;
         HereNow hereNow;
+        String canonicalUrl;
+        String url;
+        Price price;
+        List<Likes> likes;
+        Boolean dislike;
+        Boolean ok;
+        String rating;
+        String ratingColor;
+        Hours hours;
+
+    }
+
+    @Value
+    public class Hours{
+        String status;
+        Boolean isOpen;
+    }
+    @Value
+    public class Price implements Serializable{
+        String tier;
+        String message;
+        String currency;
+    }
+
+    @Value
+    public class Likes implements Serializable{
+        String count;
+        String summary;
 
     }
 
@@ -173,18 +204,13 @@ public class Models implements Serializable{
 
     @Value
     public class VenueDetailsResponse{
-        String id;
-        String name;
-        Contact contact;
-        Location location;
-        Boolean verified;
-        String url;
-        String hours;
-        String popular;
-        String menu;
-        String description;
-        String shortUrl;
-        String canonicalUrl;
+        Meta meta;
+        SingleVenueDetailResponse response;
+    }
+
+    @Value
+    public  class SingleVenueDetailResponse{
+        Venue venue;
     }
 
 }

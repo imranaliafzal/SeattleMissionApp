@@ -30,7 +30,8 @@ public class FourSquareWebService implements WebService {
     }
 
     private FourSquareWebService() {
-        OkHttpClient okHttpClient = new OkHttpClient().newBuilder().addInterceptor(chain -> {
+        OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
+                .addInterceptor(chain -> {
             Request originalRequest = chain.request();
 
             Request.Builder builder = originalRequest.newBuilder();
@@ -54,8 +55,12 @@ public class FourSquareWebService implements WebService {
 
 
     @Override
-    public Call<Models.VenuePhotosResponse> fetchPhotoList(String venue_id, String client_id, String client_secret, String version, String group, Integer limit, Integer offset) {
-        return webService.fetchPhotoList(venue_id, client_id, client_secret, version, group, limit, offset);
+    public Call<Models.VenuePhotosResponse> fetchPhotoList(String venue_id,
+                                                           String client_id, String client_secret,
+                                                           String version, String group,
+                                                           Integer limit, Integer offset) {
+        return webService.fetchPhotoList(venue_id, client_id, client_secret, version, group,
+                limit, offset);
     }
 
     @Override
@@ -69,7 +74,9 @@ public class FourSquareWebService implements WebService {
     }
 
     @Override
-    public Call<VenueSearchResponse> searchVenue(String client_id, String client_secret, String near, String query, String version, int limit) {
+    public Call<VenueSearchResponse> searchVenue(String client_id, String client_secret,
+                                                 String near, String query, String version,
+                                                 int limit) {
         return webService.searchVenue(client_id, client_secret, near, query, version, limit);
     }
 

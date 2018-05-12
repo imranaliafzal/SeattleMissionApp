@@ -93,23 +93,35 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenueViewH
             title.setText(pVenue.getName());
             category.setText(Util.categoryListToDisplay(pVenue.getCategories()));
             address.setText(pVenue.getLocation().getAddress());
-            distance.setText(Util.distanceFromSeattleCenterInMiles(pVenue.getLocation().getLat(), pVenue.getLocation().getLng())+" mi");
+            distance.setText(Util.distanceFromSeattleCenterInMiles(pVenue.getLocation().getLat(),
+                    pVenue.getLocation().getLng()) + " mi");
 
 
-            FourSquareWebService.getInstance().fetchPhotoList(pVenue.getId(), Constants.CLIENT_ID, Constants.CLIENT_SECRET, Constants.V, "venue", 1, 1).enqueue(new Callback<Models.VenuePhotosResponse>() {
+            FourSquareWebService.getInstance().fetchPhotoList(pVenue.getId(), Constants.CLIENT_ID,
+                    Constants.CLIENT_SECRET, Constants.V, "venue", 1, 1)
+                    .enqueue(new Callback<Models.VenuePhotosResponse>() {
                 @Override
-                public void onResponse(Call<Models.VenuePhotosResponse> call, Response<Models.VenuePhotosResponse> response) {
-                    if (response.isSuccessful() && response.body() != null && response.body().getResponse().getPhotos().getItems() != null && response.body().getResponse().getPhotos().getItems().size() > 0) {
+                public void onResponse(Call<Models.VenuePhotosResponse> call,
+                                       Response<Models.VenuePhotosResponse> response) {
+                    if (response.isSuccessful() && response.body() != null
+                            &&
+                            response.body().getResponse().getPhotos().getItems()
+                                    != null
+                            && response.body().getResponse().getPhotos().getItems().size() > 0) {
 
                         //now fetch the image
-                        Models.PhotoItem lPhotoItem = response.body().getResponse().getPhotos().getItems().get(0);
+                        Models.PhotoItem lPhotoItem = response.body().getResponse().getPhotos()
+                                .getItems().get(0);
                         String prefix = lPhotoItem.getPrefix();
                         String suffix = lPhotoItem.getSuffix();
-                        FourSquareWebService.getInstance().fetchPhoto(prefix, suffix).enqueue(new Callback<ResponseBody>() {
+                        FourSquareWebService.getInstance().fetchPhoto(prefix, suffix)
+                                .enqueue(new Callback<ResponseBody>() {
                             @Override
-                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            public void onResponse(Call<ResponseBody> call,
+                                                   Response<ResponseBody> response) {
                                 // display the image data in a ImageView or save it
-                                Bitmap bm = BitmapFactory.decodeStream(response.body().byteStream());
+                                Bitmap bm = BitmapFactory.decodeStream(
+                                        response.body().byteStream());
                                 mImageViewPhoto.setImageBitmap(bm);
                             }
 
@@ -129,13 +141,14 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenueViewH
 
             String lPrefix = pVenue.getCategories().get(0).getIcon().getPrefix();
             String lSuffix = pVenue.getCategories().get(0).getIcon().getSuffix();
-            FourSquareWebService.getInstance().fetchImage(lPrefix, lSuffix).enqueue(new Callback<ResponseBody>() {
+            FourSquareWebService.getInstance().fetchImage(lPrefix, lSuffix).enqueue(
+                    new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.isSuccessful() && response.body() != null) {
-                            // display the image data in a ImageView or save it
-                            Bitmap bm = BitmapFactory.decodeStream(response.body().byteStream());
-                            mImageViewIcon.setImageBitmap(bm);
+                        // display the image data in a ImageView or save it
+                        Bitmap bm = BitmapFactory.decodeStream(response.body().byteStream());
+                        mImageViewIcon.setImageBitmap(bm);
                     }
                 }
 
@@ -146,12 +159,10 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenueViewH
             });
 
 
-
-
-            mCardView.setOnClickListener(v ->{
-                        Intent i =  VenueDetailsActivity.newIntent(v.getContext(), pVenue);
-                        v.getContext().startActivity(i);
-                    });
+            mCardView.setOnClickListener(v -> {
+                Intent i = VenueDetailsActivity.newIntent(v.getContext(), pVenue);
+                v.getContext().startActivity(i);
+            });
         }
 
 

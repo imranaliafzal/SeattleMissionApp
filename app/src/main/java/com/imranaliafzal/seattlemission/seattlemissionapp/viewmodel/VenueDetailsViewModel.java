@@ -20,7 +20,7 @@ import retrofit2.Response;
  * Created by iafzal on 5/11/18.
  * Copyright © 2018 Imran Afzal All rights reserved.
  */
-public class VenueDetailsViewModel extends AndroidViewModel{
+public class VenueDetailsViewModel extends AndroidViewModel {
 
     MutableLiveData<Models.VenueDetailsResponse> mVenueDetailsResponseMutableLiveData;
 
@@ -28,14 +28,17 @@ public class VenueDetailsViewModel extends AndroidViewModel{
         super(application);
     }
 
-    public LiveData<Models.VenueDetailsResponse> getVenueDetailsResponse(String venue_id){
-        if(mVenueDetailsResponseMutableLiveData == null){
+    public LiveData<Models.VenueDetailsResponse> getVenueDetailsResponse(String venue_id) {
+        if (mVenueDetailsResponseMutableLiveData == null) {
             mVenueDetailsResponseMutableLiveData = new MutableLiveData<>();
         }
 
-        FourSquareWebService.getInstance().venueDetails(venue_id, Constants.CLIENT_ID, Constants.CLIENT_SECRET, Constants.V).enqueue(new Callback<Models.VenueDetailsResponse>() {
+        FourSquareWebService.getInstance().venueDetails(venue_id, Constants.CLIENT_ID,
+                Constants.CLIENT_SECRET, Constants.V)
+                .enqueue(new Callback<Models.VenueDetailsResponse>() {
             @Override
-            public void onResponse(Call<Models.VenueDetailsResponse> call, Response<Models.VenueDetailsResponse> response) {
+            public void onResponse(Call<Models.VenueDetailsResponse> call,
+                                   Response<Models.VenueDetailsResponse> response) {
                 mVenueDetailsResponseMutableLiveData.setValue(response.body());
             }
 
@@ -48,5 +51,5 @@ public class VenueDetailsViewModel extends AndroidViewModel{
         return mVenueDetailsResponseMutableLiveData;
     }
 
-    
+
 }

@@ -18,13 +18,17 @@ import retrofit2.http.Query;
 public interface WebService {
 
     @GET("/v2/venues/{venue_id}/photos")
-    Call<Models.VenuePhotosResponse> fetchPhotoList(@Path("venue_id") String venue_id, @Query("client_id") String client_id,
+    Call<Models.VenuePhotosResponse> fetchPhotoList(
+            @Path("venue_id") String venue_id, @Query("client_id") String client_id,
                                                     @Query("client_secret") String client_secret,
-                                                    @Query("v") String version, @Query("group") String group, @Query("limit") Integer limit, @Query("offset") Integer offset);
+                                                    @Query("v") String version,
+            @Query("group") String group, @Query("limit") Integer limit,
+            @Query("offset") Integer offset);
 
 
     @GET("{prefix}300x500{suffix}")
-    Call<ResponseBody> fetchPhoto(@Path(value = "prefix", encoded = true) String prefix, @Path(value = "suffix", encoded = true) String suffix);
+    Call<ResponseBody> fetchPhoto(@Path(value = "prefix", encoded = true) String prefix,
+                                  @Path(value = "suffix", encoded = true) String suffix);
 
     @GET("{prefix}bg_88{suffix}")
     Call<ResponseBody> fetchImage(

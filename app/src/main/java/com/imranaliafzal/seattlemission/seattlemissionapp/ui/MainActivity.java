@@ -30,6 +30,14 @@ public class MainActivity extends AppCompatActivity {
 
     private String query;
 
+    public static Intent newIntent(Context pContext, String query) {
+        Intent i = new Intent(pContext, MainActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("com.imran.ali.afzal.seattlemission.query", query);
+        i.putExtras(bundle);
+        return i;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,12 +53,13 @@ public class MainActivity extends AppCompatActivity {
         assert mRecyclerView != null;
 
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-        mainViewModel.getVenueSearchResponse(this.query).observe(this, pVenueSearchResponse -> {
-            mVenueSearchResponse = pVenueSearchResponse;
-            mAdapter = new VenuesAdapter(pVenueSearchResponse.getResponse().getVenues());
-            mRecyclerView.setAdapter(mAdapter);
-            mProgressBar.setVisibility(View.GONE);
-        });
+        mainViewModel.getVenueSearchResponse(this.query).observe(this,
+                pVenueSearchResponse -> {
+                    mVenueSearchResponse = pVenueSearchResponse;
+                    mAdapter = new VenuesAdapter(pVenueSearchResponse.getResponse().getVenues());
+                    mRecyclerView.setAdapter(mAdapter);
+                    mProgressBar.setVisibility(View.GONE);
+                });
 
         mFloatingActionButton.setOnClickListener(v -> {
             Intent i = MapsActivity.newIntent(this, mVenueSearchResponse);
@@ -59,20 +68,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void retrieveExtras(){
+    private void retrieveExtras() {
         if (getIntent().getExtras() != null) {
             Bundle extras = getIntent().getExtras();
             if (extras.containsKey("com.imran.ali.afzal.seattlemission.query")) {
                 query = extras.getString("com.imran.ali.afzal.seattlemission.query");
             }
         }
-    }
-
-    public static Intent newIntent(Context pContext, String query){
-        Intent i = new Intent(pContext, MainActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("com.imran.ali.afzal.seattlemission.query", query);
-        i.putExtras(bundle);
-        return i;
     }
 }

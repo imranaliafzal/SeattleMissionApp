@@ -1,6 +1,5 @@
 package com.imranaliafzal.seattlemission.seattlemissionapp.ui;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,14 +22,21 @@ import com.imranaliafzal.seattlemission.seattlemissionapp.viewmodel.VenueDetails
 
 public class VenueDetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
+    private static final String MAP_VIEW_BUNDLE_KEY = "AIzaSyDzxeuSAWPhkJJhr4iXp-DZYhTWaBkuLE0";
     MapView mapView;
     GoogleMap gmap;
     Models.Venue venue;
     VenueDetailsViewModel mVenueDetailsViewModel;
-    TextView tvName, tvDescription, tvContact, tvLocation, tvVerified, tvUrl, tvHours, tvPopular, tvMenu, tvShortUrl, tvCanonicalUrl;
+    TextView tvName, tvDescription, tvContact, tvLocation, tvVerified, tvUrl, tvHours, tvPopular,
+            tvMenu, tvShortUrl, tvCanonicalUrl;
 
-
-    private static final String MAP_VIEW_BUNDLE_KEY = "AIzaSyDzxeuSAWPhkJJhr4iXp-DZYhTWaBkuLE0";
+    public static Intent newIntent(Context pContext, Models.Venue pVenue) {
+        Intent i = new Intent(pContext, VenueDetailsActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("com.imran.ali.afzal.seattlemission.venue", pVenue);
+        i.putExtras(bundle);
+        return i;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,17 +57,17 @@ public class VenueDetailsActivity extends AppCompatActivity implements OnMapRead
 
         retrieveExtras();
 
-        if(venue == null){
-            return;
-        }
+        tvName.setText(venue.getName());
+//        tvHours.setText(venue.getHours().getStatus());
+//        tvCanonicalUrl.setText(venue.getCanonicalUrl());
+//        tvUrl.setText(venue.getUrl());
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        TextView lTextView = findViewById(R.id.tv_large_text);
-
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action",
+                Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show());
 
         Bundle mapViewBundle = null;
@@ -74,32 +80,25 @@ public class VenueDetailsActivity extends AppCompatActivity implements OnMapRead
         mapView.getMapAsync(this);
 
 
-        mVenueDetailsViewModel = ViewModelProviders.of(this).get(VenueDetailsViewModel.class);
-        mVenueDetailsViewModel.getVenueDetailsResponse(venue.getId()).observe(this, pVenueDetailsResponse  -> {
-            pVenueDetailsResponse.getName();
-            pVenueDetailsResponse.getDescription();
-            pVenueDetailsResponse.getContact();
-            pVenueDetailsResponse.getLocation();
-            pVenueDetailsResponse.getVerified();
-            pVenueDetailsResponse.getUrl();
-            pVenueDetailsResponse.getHours();
-            pVenueDetailsResponse.getPopular();
-            pVenueDetailsResponse.getMenu();
-            pVenueDetailsResponse.getShortUrl();
-            pVenueDetailsResponse.getCanonicalUrl();
-        });
 
-        /*FourSquareWebService.getInstance().venueDetails(venue.getId()).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                response.body();
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                t.getCause();
-            }
-        });*/
+        /*mVenueDetailsViewModel = ViewModelProviders.of(this).get(
+                VenueDetailsViewModel.class);
+        mVenueDetailsViewModel.getVenueDetailsResponse(venue.getId()).observe(this,
+                pVenueDetailsResponse -> {
+                    Models.Venue v = pVenueDetailsResponse.getResponse().getVenue();
+                    v.getName();
+                    v.getContact();
+                    v.getLocation();
+                    v.getVerified();
+                    v.getUrl();
+                    v.getHours();
+                    v.getCanonicalUrl();
+                    v.getUrl();
+                    v.getRating();
+                    v.getRatingColor();
+                });
+                mVenueDetailsViewModel.getVenueDetailsResponse(venue.getId());
+                */
     }
 
     @Override
@@ -115,33 +114,31 @@ public class VenueDetailsActivity extends AppCompatActivity implements OnMapRead
         mapView.onSaveInstanceState(mapViewBundle);
     }
 
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        gmap = googleMap;
-
-        LatLng lLatLng = new LatLng(Double.valueOf(venue.getLocation().getLat()), Double.valueOf(venue.getLocation().getLng()));
-        gmap.addMarker(new MarkerOptions().position(lLatLng).title(venue.getName()));
-        gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(lLatLng, 13f));
-
-        GoogleMapOptions lGoogleMapOptions = new GoogleMapOptions().liteMode(true);
-        gmap.setMapType(lGoogleMapOptions.getMapType());
-    }
-
-    public static Intent newIntent(Context pContext, Models.Venue pVenue){
-        Intent i = new Intent(pContext, VenueDetailsActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("com.imran.ali.afzal.seattlemission.venue", pVenue);
-        i.putExtras(bundle);
-        return i;
-    }
-
     private void retrieveExtras() {
         if (getIntent().getExtras() != null) {
             Bundle extras = getIntent().getExtras();
             if (extras.containsKey("com.imran.ali.afzal.seattlemission.venue")) {
-                venue = (Models.Venue) extras.getSerializable("com.imran.ali.afzal.seattlemission.venue");
+                venue = (Models.Venue) extras.getSerializable(
+                        "com.imran.ali.afzal.seattlemission.venue");
             }
         }
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        if(venue == null){
+            retrieveExtras();
+        }
+
+        gmap = googleMap;
+
+        GoogleMapOptions lGoogleMapOptions = new GoogleMapOptions().liteMode(true);
+        gmap.setMapType(lGoogleMapOptions.getMapType());
+
+        LatLng lLatLng = new LatLng(Double.valueOf(venue.getLocation().getLat()),
+                Double.valueOf(venue.getLocation().getLng()));
+        gmap.addMarker(new MarkerOptions().position(lLatLng).title(venue.getName()));
+        gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(lLatLng, 13f));
+
     }
 }

@@ -29,12 +29,16 @@ public class MainViewModel extends AndroidViewModel {
         mSearchResponseLiveData = new MutableLiveData<>();
     }
 
-    public LiveData<VenueSearchResponse> getVenueSearchResponse(String query){
+    public LiveData<VenueSearchResponse> getVenueSearchResponse(String query) {
 
-        Call<VenueSearchResponse> lSearchResponseCall = FourSquareWebService.getInstance().searchVenue(Constants.CLIENT_ID, Constants.CLIENT_SECRET, Constants.NEAR,query, Constants.V, Constants.LIMIT);
+        Call<VenueSearchResponse> lSearchResponseCall =
+                FourSquareWebService.getInstance().searchVenue(Constants.CLIENT_ID,
+                        Constants.CLIENT_SECRET, Constants.NEAR, query, Constants.V,
+                        Constants.LIMIT);
         lSearchResponseCall.enqueue(new Callback<VenueSearchResponse>() {
             @Override
-            public void onResponse(Call<VenueSearchResponse> call, Response<VenueSearchResponse> response) {
+            public void onResponse(Call<VenueSearchResponse> call,
+                                   Response<VenueSearchResponse> response) {
                 response.isSuccessful();
 
                 mSearchResponseLiveData.setValue(response.body());
@@ -48,12 +52,6 @@ public class MainViewModel extends AndroidViewModel {
 
         return mSearchResponseLiveData;
     }
-
-
-
-
-
-
 
 
 }

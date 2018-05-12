@@ -19,11 +19,21 @@ import com.imranaliafzal.seattlemission.seattlemissionapp.model.Models.VenueSear
 
 import java.util.List;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
+        GoogleMap.OnInfoWindowClickListener {
 
     private GoogleMap mMap;
 
     private VenueSearchResponse mVenueSearchResponse;
+
+    public static Intent newIntent(Context pContext, VenueSearchResponse pVenueSearchResponse) {
+        Intent i = new Intent(pContext, MapsActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("com.imran.ali.afzal.seattlemission.venuesearchresponse",
+                pVenueSearchResponse);
+        i.putExtras(bundle);
+        return i;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +48,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
     }
 
+    private void retrieveExtras() {
+        if (getIntent().getExtras() != null) {
+            Bundle extras = getIntent().getExtras();
+            if (
+                    extras.containsKey(
+                            "com.imran.ali.afzal.seattlemission.Models.VenueSearchResponse")
+                    ) {
+                this.mVenueSearchResponse = (VenueSearchResponse) extras.getSerializable(
+                        "com.imran.ali.afzal.seattlemission.venuesearchresponse");
+            }
+        }
+    }
 
     /**
      * Manipulates the map once available.
@@ -54,45 +76,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.setOnInfoWindowClickListener(this);
 
-        List<Models.Venue> lVenues = this.mVenueSearchResponse.getResponse().getVenues();
-        for(Models.Venue v : lVenues){
-
-            LatLng lLatLng = new LatLng(Double.valueOf(v.getLocation().getLat()),
-                    Double.valueOf(v.getLocation().getLng()) );
-              mMap.addMarker(new MarkerOptions().position(lLatLng).title(v.getName())).setTag(v);
+        if(mVenueSearchResponse == null){
+            retrieveExtras();
         }
 
-        Double lat =  Double.valueOf(mVenueSearchResponse.getResponse().getGeocode().getFeature().getGeometry().getCenter().getLat());
-        Double lng = Double.valueOf(mVenueSearchResponse.getResponse().getGeocode().getFeature().getGeometry().getCenter().getLng());
-        LatLng centerLatLng = new LatLng(lat,lng);
+        List<Models.Venue> lVenues = this.mVenueSearchResponse.getResponse().getVenues();
+        for (Models.Venue v : lVenues) {
+
+            LatLng lLatLng = new LatLng(Double.valueOf(v.getLocation().getLat()),
+                    Double.valueOf(v.getLocation().getLng()));
+            mMap.addMarker(new MarkerOptions().position(lLatLng).title(v.getName())).setTag(v);
+        }
+
+        Double lat = Double.valueOf(mVenueSearchResponse.getResponse().getGeocode().getFeature()
+                .getGeometry().getCenter().getLat());
+        Double lng = Double.valueOf(mVenueSearchResponse.getResponse().getGeocode().getFeature()
+                .getGeometry().getCenter().getLng());
+        LatLng centerLatLng = new LatLng(lat, lng);
         String tit = mVenueSearchResponse.getResponse().getGeocode().getFeature().getName();
 
-        mMap.addMarker(new MarkerOptions().position(centerLatLng).title(tit).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)));
+        mMap.addMarker(new MarkerOptions().position(centerLatLng).title(tit)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)));
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(centerLatLng, 14f));
     }
 
-
-    private void retrieveExtras() {
-        if (getIntent().getExtras() != null) {
-            Bundle extras = getIntent().getExtras();
-            if (extras.containsKey("com.imran.ali.afzal.seattlemission.Models.VenueSearchResponse")) {
-                this.mVenueSearchResponse = (VenueSearchResponse) extras.getSerializable("com.imran.ali.afzal.seattlemission.venuesearchresponse");
-            }
-        }
-    }
-
-    public static Intent newIntent(Context pContext, VenueSearchResponse pVenueSearchResponse){
-        Intent i = new Intent(pContext, MapsActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("com.imran.ali.afzal.seattlemission.venuesearchresponse", pVenueSearchResponse);
-        i.putExtras(bundle);
-        return i;
-    }
-
     @Override
     public void onInfoWindowClick(Marker pMarker) {
-        if(pMarker.getTag() != null) {
+        if (pMarker.getTag() != null) {
             Models.Venue lVenue = (Models.Venue) pMarker.getTag();
             Intent lIntent = VenueDetailsActivity.newIntent(this, lVenue);
             startActivity(lIntent);

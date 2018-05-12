@@ -19,15 +19,15 @@ public class Util {
 
     static Location SEATTLE_CENTER_LOCATION;
 
-    static{
-        SEATTLE_CENTER_LOCATION =  new Location("");
+    static {
+        SEATTLE_CENTER_LOCATION = new Location("");
         SEATTLE_CENTER_LOCATION.setLatitude(Constants.SEATTLE_CENTER_LAT);
         SEATTLE_CENTER_LOCATION.setLongitude(Constants.SEATTLE_CENTER_LNG);
     }
 
-    public static String categoryListToDisplay(List<Models.Category> pCategoryList){
+    public static String categoryListToDisplay(List<Models.Category> pCategoryList) {
         String result = "";
-        for(Models.Category c : pCategoryList){
+        for (Models.Category c : pCategoryList) {
             result += c.getName();
             result += " ";
         }
@@ -35,7 +35,7 @@ public class Util {
         return result;
     }
 
-    public static String distanceFromSeattleCenterInMiles(String lat, String lng){
+    public static String distanceFromSeattleCenterInMiles(String lat, String lng) {
         Location loc1 = new Location("");
         loc1.setLatitude(Double.valueOf(lat));
         loc1.setLongitude(Double.valueOf(lng));
@@ -44,8 +44,4 @@ public class Util {
         Double distanceInMiles = 0.000621371 * distanceInMeters;
         return df.format(distanceInMiles);
     }
-
-
-
-
 }
