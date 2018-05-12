@@ -10,6 +10,9 @@ import lombok.Value;
  * <p>
  * Created by iafzal on 5/10/18.
  * Copyright © 2018 Imran Afzal All rights reserved.
+ *
+ * Immutable Data model classes
+ *
  */
 public class Models implements Serializable {
 

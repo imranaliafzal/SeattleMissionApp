@@ -16,15 +16,18 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.imranaliafzal.seattlemission.seattlemissionapp.R;
 import com.imranaliafzal.seattlemission.seattlemissionapp.model.Models;
+import com.imranaliafzal.seattlemission.seattlemissionapp.utils.Constants;
 import com.imranaliafzal.seattlemission.seattlemissionapp.viewmodel.VenueDetailsViewModel;
 
 public class VenueDetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final String MAP_VIEW_BUNDLE_KEY = "AIzaSyDzxeuSAWPhkJJhr4iXp-DZYhTWaBkuLE0";
+
     MapView mapView;
     GoogleMap gmap;
     Models.Venue venue;
@@ -87,7 +90,7 @@ public class VenueDetailsActivity extends AppCompatActivity implements OnMapRead
                     }
 
                     if (v.getLocation() != null && v.getLocation().getFormattedAddress() != null) {
-                        tvLocation.setText("Location:" + v.getLocation().getFormattedAddress());
+                        tvLocation.setText(""+ v.getLocation().getFormattedAddress());
                     }
 
                     if (v.getCanonicalUrl() != null) {
@@ -134,9 +137,14 @@ public class VenueDetailsActivity extends AppCompatActivity implements OnMapRead
     @Override
     public void onMapReady(GoogleMap googleMap) {
         gmap = googleMap;
+
         LatLng lLatLng = new LatLng(Double.valueOf(venue.getLocation().getLat()),
                 Double.valueOf(venue.getLocation().getLng()));
         gmap.addMarker(new MarkerOptions().position(lLatLng).title(venue.getName()));
+        //Adding marker for SEATTLE CENTER
+        LatLng centerLatLng = new LatLng(Constants.SEATTLE_CENTER_LAT, Constants.SEATTLE_CENTER_LNG);
+        gmap.addMarker(new MarkerOptions().position(centerLatLng).title("Seattle")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)));
         gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(lLatLng, 13f));
 
     }

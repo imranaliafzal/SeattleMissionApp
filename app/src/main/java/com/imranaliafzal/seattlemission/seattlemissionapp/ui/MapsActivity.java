@@ -93,6 +93,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Double lng = Double.valueOf(mVenueSearchResponse.getResponse().getGeocode().getFeature()
                 .getGeometry().getCenter().getLng());
         LatLng centerLatLng = new LatLng(lat, lng);
+
         String tit = mVenueSearchResponse.getResponse().getGeocode().getFeature().getName();
 
         mMap.addMarker(new MarkerOptions().position(centerLatLng).title(tit)

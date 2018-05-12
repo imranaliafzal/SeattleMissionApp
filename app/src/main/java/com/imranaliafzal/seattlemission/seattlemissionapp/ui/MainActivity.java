@@ -17,6 +17,18 @@ import com.imranaliafzal.seattlemission.seattlemissionapp.model.Models;
 import com.imranaliafzal.seattlemission.seattlemissionapp.model.Models.VenueSearchResponse;
 import com.imranaliafzal.seattlemission.seattlemissionapp.viewmodel.MainViewModel;
 
+/**
+ * SeattleMission
+ * <p>
+ * Created by iafzal on 5/10/18.
+ * Copyright © 2018 Imran Afzal All rights reserved.
+ *
+ * MainActivity class
+ *
+ * Launch class - It contains a search field to search for location near Seattle Center
+ *
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     private MainViewModel mainViewModel;

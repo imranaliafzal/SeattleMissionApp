@@ -17,6 +17,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * <p>
  * Created by iafzal on 5/10/18.
  * Copyright © 2018 Imran Afzal All rights reserved.
+ *
+ * Concrete Implementation of the API Interface. It has factory methods and other
+ * static final params.
+ *
+ *
  */
 public class FourSquareWebService implements WebService {
     private static final String baseUrl = "https://api.foursquare.com";
