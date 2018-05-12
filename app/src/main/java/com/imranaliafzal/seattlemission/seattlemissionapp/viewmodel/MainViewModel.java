@@ -20,18 +20,40 @@ import retrofit2.Response;
  * <p>
  * Created by iafzal on 5/10/18.
  * Copyright © 2018 Imran Afzal All rights reserved.
+ *
+ * ViewModel for MainActivity
  */
 public class MainViewModel extends AndroidViewModel {
 
+
+    /**
+     * LiveData to hold search response from api
+     * It is observed by the Main Activity
+     */
     private MutableLiveData<Models.VenueSearchResponse> mSearchResponseLiveData;
+
+    /**
+     * LiveData to MiniVenues returned from four square.
+     * It is observed by the Main Activity
+     *
+     */
     private MutableLiveData<Models.VenueSuggest> mSuggestMutableLiveData;
 
+    /**
+     * Constructor create - ViewModel is instantiated in the createActivity method of MainActivity
+     * @param application
+     */
     public MainViewModel(@NonNull Application application) {
         super(application);
         mSearchResponseLiveData = new MutableLiveData<>();
         mSuggestMutableLiveData = new MutableLiveData<>();
     }
 
+    /**
+     * Returns the reference to suggest Api response. Since the apai
+     * @param query
+     * @return
+     */
     public LiveData<Models.VenueSuggest> getVenueSearchCompletion(String query) {
 
         if (query == null || query.isEmpty()) {

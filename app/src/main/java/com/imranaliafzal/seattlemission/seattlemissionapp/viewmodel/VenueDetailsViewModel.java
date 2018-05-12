@@ -19,6 +19,9 @@ import retrofit2.Response;
  * <p>
  * Created by iafzal on 5/11/18.
  * Copyright © 2018 Imran Afzal All rights reserved.
+ *
+ *
+ *
  */
 public class VenueDetailsViewModel extends AndroidViewModel {
 

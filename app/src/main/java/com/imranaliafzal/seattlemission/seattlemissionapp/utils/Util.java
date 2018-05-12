@@ -12,6 +12,9 @@ import java.util.List;
  * <p>
  * Created by iafzal on 5/11/18.
  * Copyright © 2018 Imran Afzal All rights reserved.
+ *
+ * Utility functions for formatting and such
+ *
  */
 public class Util {
 

@@ -5,6 +5,8 @@ package com.imranaliafzal.seattlemission.seattlemissionapp.utils;
  * <p>
  * Created by iafzal on 5/11/18.
  * Copyright © 2018 Imran Afzal All rights reserved.
+ *
+ * Constants used through out the app
  */
 public class Constants {
     public static final Double SEATTLE_CENTER_LAT = 47.608013;
