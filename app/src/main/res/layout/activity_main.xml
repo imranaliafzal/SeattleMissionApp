@@ -23,7 +23,8 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:hint="Enter your search here"/>
+            android:hint="Enter your search here"
+            />
     </android.support.design.widget.TextInputLayout>
 
     <FrameLayout

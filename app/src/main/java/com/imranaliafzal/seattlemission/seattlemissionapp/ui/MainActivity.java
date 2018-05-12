@@ -74,21 +74,22 @@ public class MainActivity extends AppCompatActivity {
         mTextInputEditText = findViewById(R.id.et_query);
         mTextInputEditText.setOnKeyListener((v, keyCode, event) -> {
 
-            if(mTextInputEditText.getText().length()  < 1 ){
-                return true;
-            }
+            if(mTextInputEditText.getText().length()  > 0) {
 
-                if(event.getAction() == KeyEvent.ACTION_UP
-                        ){
+                if (event.getAction() == KeyEvent.ACTION_UP
+                        ) {
                     showProgress();
-//                    mainViewModel.getVenueSearchCompletion(mTextInputEditText.getText().toString());
+//              mainViewModel.getVenueSearchCompletion(mTextInputEditText.getText().toString());
                     mainViewModel.getVenueSearchResponse(mTextInputEditText.getText().toString());
 
-                }else if(event.getAction() == KeyEvent.KEYCODE_ENTER ){
+                } else if (event.getAction() == KeyEvent.KEYCODE_ENTER) {
 
                     showProgress();
                     mainViewModel.getVenueSearchResponse(mTextInputEditText.getText().toString());
                 }
+
+
+            }
 
             return true;
 
@@ -96,7 +97,9 @@ public class MainActivity extends AppCompatActivity {
 
         mFloatingActionButton.setOnClickListener(v -> {
 
-            if(mVenueSearchResponse == null || mVenueSearchResponse.getResponse() == null || mVenueSearchResponse.getResponse().getVenues() == null || mVenueSearchResponse.getResponse().getVenues().isEmpty()) {
+            if(mVenueSearchResponse == null || mVenueSearchResponse.getResponse() == null ||
+                    mVenueSearchResponse.getResponse().getVenues() == null ||
+                    mVenueSearchResponse.getResponse().getVenues().isEmpty()) {
                 return;
             }
 

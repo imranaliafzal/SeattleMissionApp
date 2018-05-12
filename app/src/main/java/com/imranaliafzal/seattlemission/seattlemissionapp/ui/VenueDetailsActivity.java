@@ -78,11 +78,22 @@ public class VenueDetailsActivity extends AppCompatActivity implements OnMapRead
         mVenueDetailsViewModel.getVenueDetailsResponse(venue.getId()).observe(this,
                 pVenueDetailsResponse -> {
                     Models.Venue v = venue = pVenueDetailsResponse.getResponse().getVenue();
-                    tvName.setText("Name: "+v.getName());
-                    tvHours.setText("Hours: "+v.getHours().getStatus());
-                    tvLocation.setText("Location:"+v.getLocation().getFormattedAddress());
-                    String url =  v.getCanonicalUrl();
-                    tvCanonicalUrl.setText(url);
+                    if(v.getName() != null) {
+                        tvName.setText("Name: " + v.getName());
+                    }
+
+                    if(v.getHours() != null && v.getHours().getStatus() != null){
+                        tvHours.setText("Hours: "+v.getHours().getStatus());
+                    }
+
+                    if(v.getLocation() != null && v.getLocation().getFormattedAddress() != null) {
+                        tvLocation.setText("Location:" + v.getLocation().getFormattedAddress());
+                    }
+
+                    if(v.getCanonicalUrl() != null) {
+                        String url = v.getCanonicalUrl();
+                        tvCanonicalUrl.setText(url);
+                    }
 
                 });
 
