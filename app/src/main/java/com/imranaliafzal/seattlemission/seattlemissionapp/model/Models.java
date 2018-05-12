@@ -11,62 +11,61 @@ import lombok.Value;
  * Created by iafzal on 5/10/18.
  * Copyright © 2018 Imran Afzal All rights reserved.
  */
-public class Models implements Serializable{
+public class Models implements Serializable {
 
     @Value
-    public class VenueSearchResponse implements Serializable{
+    public class VenueSearchResponse implements Serializable {
         Meta meta;
         VenuesResponse response;
     }
 
     @Value
-    public class Meta implements Serializable{
+    public class Meta implements Serializable {
         String code;
         String requestId;
 
     }
 
     @Value
-    public class Geocode implements Serializable{
+    public class Geocode implements Serializable {
         Feature feature;
 
     }
 
     @Value
-    public class Feature implements Serializable{
+    public class Feature implements Serializable {
         Geometry geometry;
         String name;
     }
 
     @Value
-    public class Geometry implements Serializable{
+    public class Geometry implements Serializable {
         Center center;
     }
 
     @Value
-    public class Center implements Serializable{
+    public class Center implements Serializable {
         String lat;
         String lng;
     }
 
 
-
     @Value
-    public class VenuesResponse implements Serializable{
+    public class VenuesResponse implements Serializable {
         List<Venue> venues;
         Geocode geocode;
     }
 
 
     @Value
-    public class Contact implements Serializable{
+    public class Contact implements Serializable {
         String phone;
         String formattedPhone;
 
     }
 
     @Value
-    public class Location implements Serializable{
+    public class Location implements Serializable {
         String address;
         String crossStreet;
         String lat;
@@ -79,7 +78,7 @@ public class Models implements Serializable{
     }
 
     @Value
-    public class LabeledLatLng implements Serializable{
+    public class LabeledLatLng implements Serializable {
         String label;
         String lat;
         String lng;
@@ -91,7 +90,7 @@ public class Models implements Serializable{
     }
 
     @Value
-    public class Category implements Serializable{
+    public class Category implements Serializable {
         String id;
         String name;
         String pluralName;
@@ -99,44 +98,45 @@ public class Models implements Serializable{
         Icon icon;
         Boolean primary;
     }
+
     @Value
-    public class Icon implements Serializable{
+    public class Icon implements Serializable {
         String prefix;
         String suffix;
     }
 
     @Value
-    public class VenueChain implements Serializable{
+    public class VenueChain implements Serializable {
     }
 
     @Value
-    public class Stats implements Serializable{
-        Integer tipCount, usersCount,checkinsCount,visitsCount;
+    public class Stats implements Serializable {
+        Integer tipCount, usersCount, checkinsCount, visitsCount;
 
     }
 
     @Value
-    public class BeenHere implements Serializable{
-        Integer count,lastCheckinExpiredAt,unconfirmedCount;
+    public class BeenHere implements Serializable {
+        Integer count, lastCheckinExpiredAt, unconfirmedCount;
         Boolean marked;
     }
 
     @Value
-    public class HereNow implements Serializable{
+    public class HereNow implements Serializable {
         Integer count;
         String summary;
         List<Group> groups;
     }
 
     @Value
-    public class Group implements Serializable{
+    public class Group implements Serializable {
     }
 
     @Value
-    public class Venue implements Serializable{
+    public class Venue implements Serializable {
 
-        String  id;
-        String  name;
+        String id;
+        String name;
         Location location;
         Contact contact;
         Boolean verified;
@@ -160,67 +160,68 @@ public class Models implements Serializable{
     }
 
     @Value
-    public class Hours{
+    public class Hours {
         String status;
         Boolean isOpen;
     }
+
     @Value
-    public class Price implements Serializable{
+    public class Price implements Serializable {
         String tier;
         String message;
         String currency;
     }
 
     @Value
-    public class Likes implements Serializable{
+    public class Likes implements Serializable {
         String count;
         String summary;
 
     }
 
     @Value
-    public class VenuePhotosResponse implements Serializable{
+    public class VenuePhotosResponse implements Serializable {
         Meta meta;
         PhotosResponse response;
     }
 
     @Value
-    public class PhotosResponse{
+    public class PhotosResponse {
         Photos photos;
     }
 
     @Value
-    public class Photos{
+    public class Photos {
         Integer count;
         List<PhotoItem> items;
     }
 
     @Value
-    public class PhotoItem{
+    public class PhotoItem {
         String id;
         String prefix;
         String suffix;
     }
 
     @Value
-    public class VenueDetailsResponse{
+    public class VenueDetailsResponse {
         Meta meta;
         SingleVenueDetailResponse response;
     }
 
     @Value
-    public  class SingleVenueDetailResponse{
+    public class SingleVenueDetailResponse {
         Venue venue;
     }
 
     @Value
-    public class VenueSuggest{
+    public class VenueSuggest {
         Meta meta;
         VenueSuggestResponse response;
     }
 
     @Value
-    public class VenueSuggestResponse{
+    public class VenueSuggestResponse {
         List<Venue> minivenues;
     }
 

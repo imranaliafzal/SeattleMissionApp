@@ -30,24 +30,24 @@ public class VenueDetailsViewModel extends AndroidViewModel {
     }
 
     public LiveData<Models.VenueDetailsResponse> getVenueDetailsResponse(String venue_id) {
-        if(venue_id.isEmpty()){
-           return mVenueDetailsResponseMutableLiveData;
+        if (venue_id.isEmpty()) {
+            return mVenueDetailsResponseMutableLiveData;
         }
 
         FourSquareWebService.getInstance().venueDetails(venue_id, Constants.CLIENT_ID,
                 Constants.CLIENT_SECRET, Constants.V)
                 .enqueue(new Callback<Models.VenueDetailsResponse>() {
-            @Override
-            public void onResponse(Call<Models.VenueDetailsResponse> call,
-                                   Response<Models.VenueDetailsResponse> response) {
-                mVenueDetailsResponseMutableLiveData.setValue(response.body());
-            }
+                    @Override
+                    public void onResponse(Call<Models.VenueDetailsResponse> call,
+                                           Response<Models.VenueDetailsResponse> response) {
+                        mVenueDetailsResponseMutableLiveData.setValue(response.body());
+                    }
 
-            @Override
-            public void onFailure(Call<Models.VenueDetailsResponse> call, Throwable t) {
-                t.getCause();
-            }
-        });
+                    @Override
+                    public void onFailure(Call<Models.VenueDetailsResponse> call, Throwable t) {
+                        t.getCause();
+                    }
+                });
 
         return mVenueDetailsResponseMutableLiveData;
     }

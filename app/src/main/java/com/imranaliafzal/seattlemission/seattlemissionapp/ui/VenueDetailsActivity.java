@@ -78,29 +78,29 @@ public class VenueDetailsActivity extends AppCompatActivity implements OnMapRead
         mVenueDetailsViewModel.getVenueDetailsResponse(venue.getId()).observe(this,
                 pVenueDetailsResponse -> {
                     Models.Venue v = venue = pVenueDetailsResponse.getResponse().getVenue();
-                    if(v.getName() != null) {
+                    if (v.getName() != null) {
                         tvName.setText("Name: " + v.getName());
                     }
 
-                    if(v.getHours() != null && v.getHours().getStatus() != null){
-                        tvHours.setText("Hours: "+v.getHours().getStatus());
+                    if (v.getHours() != null && v.getHours().getStatus() != null) {
+                        tvHours.setText("Hours: " + v.getHours().getStatus());
                     }
 
-                    if(v.getLocation() != null && v.getLocation().getFormattedAddress() != null) {
+                    if (v.getLocation() != null && v.getLocation().getFormattedAddress() != null) {
                         tvLocation.setText("Location:" + v.getLocation().getFormattedAddress());
                     }
 
-                    if(v.getCanonicalUrl() != null) {
+                    if (v.getCanonicalUrl() != null) {
                         String url = v.getCanonicalUrl();
                         tvCanonicalUrl.setText(url);
                     }
 
                 });
 
-                mVenueDetailsViewModel.getVenueDetailsResponse(venue.getId());
+        mVenueDetailsViewModel.getVenueDetailsResponse(venue.getId());
 
         tvCanonicalUrl.setOnClickListener(v -> {
-            if(!venue.getCanonicalUrl().isEmpty()){
+            if (!venue.getCanonicalUrl().isEmpty()) {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(venue.getCanonicalUrl()));
                 startActivity(browserIntent);
                 finish();

@@ -34,19 +34,19 @@ public class MainViewModel extends AndroidViewModel {
 
     public LiveData<Models.VenueSuggest> getVenueSearchCompletion(String query) {
 
-        if(query == null || query.isEmpty()){
+        if (query == null || query.isEmpty()) {
             return mSuggestMutableLiveData;
         }
 
         Call<Models.VenueSuggest> lSearchResponseCall =
                 FourSquareWebService.getInstance().searchCompletion(Constants.CLIENT_ID,
-                        Constants.CLIENT_SECRET, query, Constants.NEAR, Constants.V ,Constants.LIMIT);
+                        Constants.CLIENT_SECRET, query, Constants.NEAR, Constants.V, Constants.LIMIT);
 
         lSearchResponseCall.enqueue(new Callback<Models.VenueSuggest>() {
             @Override
             public void onResponse(Call<Models.VenueSuggest> call,
                                    Response<Models.VenueSuggest> response) {
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
 
                     mSuggestMutableLiveData.setValue(response.body());
                 }
@@ -64,7 +64,7 @@ public class MainViewModel extends AndroidViewModel {
 
     public LiveData<VenueSearchResponse> getVenueSearchResponse(String query) {
 
-        if(query == null || query.isEmpty()){
+        if (query == null || query.isEmpty()) {
             return mSearchResponseLiveData;
         }
 

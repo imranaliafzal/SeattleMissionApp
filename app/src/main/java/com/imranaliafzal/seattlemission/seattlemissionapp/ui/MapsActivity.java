@@ -76,7 +76,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.setOnInfoWindowClickListener(this);
 
-        if(mVenueSearchResponse == null){
+        if (mVenueSearchResponse == null) {
             retrieveExtras();
         }
 

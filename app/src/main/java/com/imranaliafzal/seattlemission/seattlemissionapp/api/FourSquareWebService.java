@@ -20,25 +20,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class FourSquareWebService implements WebService {
     private static final String baseUrl = "https://api.foursquare.com";
-
-    private WebService webService;
-
     private static final FourSquareWebService ourInstance = new FourSquareWebService();
-
-    public static FourSquareWebService getInstance() {
-        return ourInstance;
-    }
+    private WebService webService;
 
     private FourSquareWebService() {
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
                 .addInterceptor(chain -> {
-            Request originalRequest = chain.request();
+                    Request originalRequest = chain.request();
 
-            Request.Builder builder = originalRequest.newBuilder();
+                    Request.Builder builder = originalRequest.newBuilder();
 
-            Request newRequest = builder.build();
-            return chain.proceed(newRequest);
-        }).build();
+                    Request newRequest = builder.build();
+                    return chain.proceed(newRequest);
+                }).build();
 
         Gson gson = new GsonBuilder()
                 .setLenient()
@@ -53,6 +47,9 @@ public class FourSquareWebService implements WebService {
         webService = retrofit.create(WebService.class);
     }
 
+    public static FourSquareWebService getInstance() {
+        return ourInstance;
+    }
 
     @Override
     public Call<Models.VenuePhotosResponse> fetchPhotoList(String venue_id,
@@ -89,7 +86,7 @@ public class FourSquareWebService implements WebService {
 
     @Override
     public Call<Models.VenueSuggest> searchCompletion(String client_id, String client_secret, String query, String near, String version, int limit) {
-        return webService.searchCompletion(client_id,  client_secret, query, near, version, limit);
+        return webService.searchCompletion(client_id, client_secret, query, near, version, limit);
     }
 
 }

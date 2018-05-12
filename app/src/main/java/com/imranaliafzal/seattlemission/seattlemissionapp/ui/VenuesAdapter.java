@@ -100,48 +100,48 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenueViewH
             FourSquareWebService.getInstance().fetchPhotoList(pVenue.getId(), Constants.CLIENT_ID,
                     Constants.CLIENT_SECRET, Constants.V, "venue", 1, 1)
                     .enqueue(new Callback<Models.VenuePhotosResponse>() {
-                @Override
-                public void onResponse(Call<Models.VenuePhotosResponse> call,
-                                       Response<Models.VenuePhotosResponse> response) {
-                    if (response.isSuccessful() && response.body() != null
-                            &&
-                            response.body().getResponse().getPhotos().getItems()
-                                    != null
-                            && response.body().getResponse().getPhotos().getItems().size() > 0) {
+                        @Override
+                        public void onResponse(Call<Models.VenuePhotosResponse> call,
+                                               Response<Models.VenuePhotosResponse> response) {
+                            if (response.isSuccessful() && response.body() != null
+                                    &&
+                                    response.body().getResponse().getPhotos().getItems()
+                                            != null
+                                    && response.body().getResponse().getPhotos().getItems().size() > 0) {
 
-                        //now fetch the image
-                        Models.PhotoItem lPhotoItem = response.body().getResponse().getPhotos()
-                                .getItems().get(0);
-                        String prefix = lPhotoItem.getPrefix();
-                        String suffix = lPhotoItem.getSuffix();
-                        FourSquareWebService.getInstance().fetchPhoto(prefix, suffix)
-                                .enqueue(new Callback<ResponseBody>() {
-                            @Override
-                            public void onResponse(Call<ResponseBody> call,
-                                                   Response<ResponseBody> response) {
-                                // display the image data in a ImageView or save it
-                                Bitmap bm = BitmapFactory.decodeStream(
-                                        response.body().byteStream());
-                                mImageViewPhoto.setImageBitmap(bm);
+                                //now fetch the image
+                                Models.PhotoItem lPhotoItem = response.body().getResponse().getPhotos()
+                                        .getItems().get(0);
+                                String prefix = lPhotoItem.getPrefix();
+                                String suffix = lPhotoItem.getSuffix();
+                                FourSquareWebService.getInstance().fetchPhoto(prefix, suffix)
+                                        .enqueue(new Callback<ResponseBody>() {
+                                            @Override
+                                            public void onResponse(Call<ResponseBody> call,
+                                                                   Response<ResponseBody> response) {
+                                                // display the image data in a ImageView or save it
+                                                Bitmap bm = BitmapFactory.decodeStream(
+                                                        response.body().byteStream());
+                                                mImageViewPhoto.setImageBitmap(bm);
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                                            }
+                                        });
                             }
+                        }
 
-                            @Override
-                            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-                            }
-                        });
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<Models.VenuePhotosResponse> call, Throwable t) {
-                    t.getCause();
-                }
-            });
+                        @Override
+                        public void onFailure(Call<Models.VenuePhotosResponse> call, Throwable t) {
+                            t.getCause();
+                        }
+                    });
 
             List<Models.Category> lCategories = pVenue.getCategories();
 
-            if(lCategories.size() > 0) {
+            if (lCategories.size() > 0) {
                 String lPrefix = lCategories.get(0).getIcon().getPrefix();
                 String lSuffix = lCategories.get(0).getIcon().getSuffix();
 

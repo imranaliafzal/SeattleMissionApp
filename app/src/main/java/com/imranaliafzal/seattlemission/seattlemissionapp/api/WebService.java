@@ -20,8 +20,8 @@ public interface WebService {
     @GET("/v2/venues/{venue_id}/photos")
     Call<Models.VenuePhotosResponse> fetchPhotoList(
             @Path("venue_id") String venue_id, @Query("client_id") String client_id,
-                                                    @Query("client_secret") String client_secret,
-                                                    @Query("v") String version,
+            @Query("client_secret") String client_secret,
+            @Query("v") String version,
             @Query("group") String group, @Query("limit") Integer limit,
             @Query("offset") Integer offset);
 
@@ -38,11 +38,11 @@ public interface WebService {
 
     @GET("/v2/venues/search")
     Call<Models.VenueSearchResponse> searchVenue(@Query("client_id") String client_id,
-                                          @Query("client_secret") String client_secret,
-                                          @Query("near") String near,
-                                          @Query("query") String query,
-                                          @Query("v") String version,
-                                          @Query("limit") int limit
+                                                 @Query("client_secret") String client_secret,
+                                                 @Query("near") String near,
+                                                 @Query("query") String query,
+                                                 @Query("v") String version,
+                                                 @Query("limit") int limit
     );
 
     @GET("/v2/venues/{venue_id}")
@@ -50,16 +50,16 @@ public interface WebService {
                                                    @Query("client_id") String client_id,
                                                    @Query("client_secret") String client_secret,
                                                    @Query("v") String version
-                                                   );
+    );
 
     @GET("/v2/venues/suggestcompletion")
     Call<Models.VenueSuggest> searchCompletion(@Query("client_id") String client_id,
-                                                      @Query("client_secret") String client_secret,
+                                               @Query("client_secret") String client_secret,
                                                @Query("query") String query,
                                                @Query("near") String near,
                                                @Query("v") String version,
                                                @Query("limit") int limit
-                                                );
+    );
 
 
 }

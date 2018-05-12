@@ -60,15 +60,15 @@ public class MainActivity extends AppCompatActivity {
                     mVenueSearchResponse = pVenueSearchResponse;
                     mAdapter = new VenuesAdapter(pVenueSearchResponse.getResponse().getVenues());
                     mRecyclerView.setAdapter(mAdapter);
-                   hideProgress();
+                    hideProgress();
                 });
 
 
         mainViewModel.getVenueSearchCompletion(this.query).observe(this,
                 pVenueSuggest -> {
                     mVenueSuggest = pVenueSuggest;
-                     mAdapter = new VenuesAdapter(pVenueSuggest.getResponse().getMinivenues());
-                     mRecyclerView.setAdapter(mAdapter);
+                    mAdapter = new VenuesAdapter(pVenueSuggest.getResponse().getMinivenues());
+                    mRecyclerView.setAdapter(mAdapter);
                     hideProgress();
                 });
 
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(mTextInputEditText.getText().length()  > 0) {
+                if (mTextInputEditText.getText().length() > 0) {
                     showProgress();
                     mainViewModel.getVenueSearchResponse(mTextInputEditText.getText().toString());
                 }
@@ -96,12 +96,11 @@ public class MainActivity extends AppCompatActivity {
 
         mFloatingActionButton.setOnClickListener(v -> {
 
-            if(mVenueSearchResponse == null || mVenueSearchResponse.getResponse() == null ||
+            if (mVenueSearchResponse == null || mVenueSearchResponse.getResponse() == null ||
                     mVenueSearchResponse.getResponse().getVenues() == null ||
                     mVenueSearchResponse.getResponse().getVenues().isEmpty()) {
                 return;
             }
-
 
 
             Intent i = MapsActivity.newIntent(this, mVenueSearchResponse);
@@ -111,11 +110,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void hideProgress(){
+    private void hideProgress() {
         mProgressBar.setVisibility(View.GONE);
     }
 
-    private void showProgress(){
+    private void showProgress() {
         mProgressBar.setVisibility(View.VISIBLE);
     }
 
