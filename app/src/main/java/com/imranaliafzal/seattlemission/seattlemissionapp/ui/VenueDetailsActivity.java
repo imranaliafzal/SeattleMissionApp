@@ -5,15 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -24,11 +21,11 @@ import com.imranaliafzal.seattlemission.seattlemissionapp.model.Models;
 import com.imranaliafzal.seattlemission.seattlemissionapp.utils.Constants;
 import com.imranaliafzal.seattlemission.seattlemissionapp.viewmodel.VenueDetailsViewModel;
 
+/**
+ *
+ */
+
 public class VenueDetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
-
-    private static final String MAP_VIEW_BUNDLE_KEY = "AIzaSyDzxeuSAWPhkJJhr4iXp-DZYhTWaBkuLE0";
-
-    MapView mapView;
     GoogleMap gmap;
     Models.Venue venue;
     VenueDetailsViewModel mVenueDetailsViewModel;
@@ -63,11 +60,6 @@ public class VenueDetailsActivity extends AppCompatActivity implements OnMapRead
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action",
-                Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show());
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapView);
@@ -109,19 +101,6 @@ public class VenueDetailsActivity extends AppCompatActivity implements OnMapRead
                 finish();
             }
         });
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        Bundle mapViewBundle = outState.getBundle(MAP_VIEW_BUNDLE_KEY);
-        if (mapViewBundle == null) {
-            mapViewBundle = new Bundle();
-            outState.putBundle(MAP_VIEW_BUNDLE_KEY, mapViewBundle);
-        }
-
-        mapView.onSaveInstanceState(mapViewBundle);
     }
 
     private void retrieveExtras() {
