@@ -11,9 +11,9 @@ import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.imranaliafzal.seattlemission.seattlemissionapp.R;
@@ -70,15 +70,10 @@ public class VenueDetailsActivity extends AppCompatActivity implements OnMapRead
                 Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show());
 
-        Bundle mapViewBundle = null;
-        if (savedInstanceState != null) {
-            mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
-        }
-
-        mapView = findViewById(R.id.mapView);
-        mapView.onCreate(mapViewBundle);
-        mapView.getMapAsync(this);
-
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.mapView);
+        mapFragment.getView().setClickable(false);
+        mapFragment.getMapAsync(this);
 
 
         /*mVenueDetailsViewModel = ViewModelProviders.of(this).get(
@@ -126,15 +121,7 @@ public class VenueDetailsActivity extends AppCompatActivity implements OnMapRead
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        if(venue == null){
-            retrieveExtras();
-        }
-
         gmap = googleMap;
-
-        GoogleMapOptions lGoogleMapOptions = new GoogleMapOptions().liteMode(true);
-        gmap.setMapType(lGoogleMapOptions.getMapType());
-
         LatLng lLatLng = new LatLng(Double.valueOf(venue.getLocation().getLat()),
                 Double.valueOf(venue.getLocation().getLng()));
         gmap.addMarker(new MarkerOptions().position(lLatLng).title(venue.getName()));

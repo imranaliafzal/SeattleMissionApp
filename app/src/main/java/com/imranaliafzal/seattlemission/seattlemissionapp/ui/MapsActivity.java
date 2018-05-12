@@ -53,7 +53,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Bundle extras = getIntent().getExtras();
             if (
                     extras.containsKey(
-                            "com.imran.ali.afzal.seattlemission.Models.VenueSearchResponse")
+                            "com.imran.ali.afzal.seattlemission.venuesearchresponse")
                     ) {
                 this.mVenueSearchResponse = (VenueSearchResponse) extras.getSerializable(
                         "com.imran.ali.afzal.seattlemission.venuesearchresponse");
