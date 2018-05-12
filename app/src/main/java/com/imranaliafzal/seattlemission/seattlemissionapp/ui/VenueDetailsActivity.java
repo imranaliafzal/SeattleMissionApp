@@ -125,6 +125,5 @@ public class VenueDetailsActivity extends AppCompatActivity implements OnMapRead
         gmap.addMarker(new MarkerOptions().position(centerLatLng).title("Seattle")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)));
         gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(lLatLng, 13f));
-
     }
 }
