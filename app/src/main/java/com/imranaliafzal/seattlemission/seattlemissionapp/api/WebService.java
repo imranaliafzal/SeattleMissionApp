@@ -52,5 +52,14 @@ public interface WebService {
                                                    @Query("v") String version
                                                    );
 
+    @GET("/v2/venues/suggestcompletion")
+    Call<Models.VenueSuggest> searchCompletion(@Query("client_id") String client_id,
+                                                      @Query("client_secret") String client_secret,
+                                               @Query("query") String query,
+                                               @Query("near") String near,
+                                               @Query("v") String version,
+                                               @Query("limit") int limit
+                                                );
+
 
 }

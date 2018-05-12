@@ -1,6 +1,5 @@
 package com.imranaliafzal.seattlemission.seattlemissionapp.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.AutoCompleteTextView;
@@ -23,9 +22,7 @@ public class SearchActivity extends AppCompatActivity {
         Button mSearchButton = findViewById(R.id.bt_search);
         mSearchButton.setOnClickListener(view -> {
             if (mQueryView.getText().length() > 0) {
-                Intent i = MainActivity.newIntent(
-                        this, mQueryView.getText().toString());
-                startActivity(i);
+
             }
         });
 

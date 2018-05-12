@@ -1,7 +1,9 @@
 package com.imranaliafzal.seattlemission.seattlemissionapp.ui;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -42,6 +44,7 @@ public class VenueDetailsActivity extends AppCompatActivity implements OnMapRead
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_venue_details);
+        retrieveExtras();
 
         tvName = findViewById(R.id.tv_name);
         tvDescription = findViewById(R.id.tv_description);
@@ -54,13 +57,6 @@ public class VenueDetailsActivity extends AppCompatActivity implements OnMapRead
         tvMenu = findViewById(R.id.tv_menu);
         tvShortUrl = findViewById(R.id.tv_short_url);
         tvCanonicalUrl = findViewById(R.id.tv_canonical_url);
-
-        retrieveExtras();
-
-        tvName.setText(venue.getName());
-//        tvHours.setText(venue.getHours().getStatus());
-//        tvCanonicalUrl.setText(venue.getCanonicalUrl());
-//        tvUrl.setText(venue.getUrl());
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -75,25 +71,30 @@ public class VenueDetailsActivity extends AppCompatActivity implements OnMapRead
         mapFragment.getView().setClickable(false);
         mapFragment.getMapAsync(this);
 
+        mVenueDetailsViewModel = new VenueDetailsViewModel(getApplication());
 
-        /*mVenueDetailsViewModel = ViewModelProviders.of(this).get(
+        mVenueDetailsViewModel = ViewModelProviders.of(this).get(
                 VenueDetailsViewModel.class);
         mVenueDetailsViewModel.getVenueDetailsResponse(venue.getId()).observe(this,
                 pVenueDetailsResponse -> {
-                    Models.Venue v = pVenueDetailsResponse.getResponse().getVenue();
-                    v.getName();
-                    v.getContact();
-                    v.getLocation();
-                    v.getVerified();
-                    v.getUrl();
-                    v.getHours();
-                    v.getCanonicalUrl();
-                    v.getUrl();
-                    v.getRating();
-                    v.getRatingColor();
+                    Models.Venue v = venue = pVenueDetailsResponse.getResponse().getVenue();
+                    tvName.setText("Name: "+v.getName());
+                    tvHours.setText("Hours: "+v.getHours().getStatus());
+                    tvLocation.setText("Location:"+v.getLocation().getFormattedAddress());
+                    String url =  v.getCanonicalUrl();
+                    tvCanonicalUrl.setText(url);
+
                 });
+
                 mVenueDetailsViewModel.getVenueDetailsResponse(venue.getId());
-                */
+
+        tvCanonicalUrl.setOnClickListener(v -> {
+            if(!venue.getCanonicalUrl().isEmpty()){
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(venue.getCanonicalUrl()));
+                startActivity(browserIntent);
+                finish();
+            }
+        });
     }
 
     @Override

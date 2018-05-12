@@ -87,4 +87,9 @@ public class FourSquareWebService implements WebService {
         return webService.venueDetails(venue_id, client_id, client_secret, version);
     }
 
+    @Override
+    public Call<Models.VenueSuggest> searchCompletion(String client_id, String client_secret, String query, String near, String version, int limit) {
+        return webService.searchCompletion(client_id,  client_secret, query, near, version, limit);
+    }
+
 }

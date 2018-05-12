@@ -139,25 +139,29 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenueViewH
                 }
             });
 
-            String lPrefix = pVenue.getCategories().get(0).getIcon().getPrefix();
-            String lSuffix = pVenue.getCategories().get(0).getIcon().getSuffix();
-            FourSquareWebService.getInstance().fetchImage(lPrefix, lSuffix).enqueue(
-                    new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    if (response.isSuccessful() && response.body() != null) {
-                        // display the image data in a ImageView or save it
-                        Bitmap bm = BitmapFactory.decodeStream(response.body().byteStream());
-                        mImageViewIcon.setImageBitmap(bm);
-                    }
-                }
+            List<Models.Category> lCategories = pVenue.getCategories();
 
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    t.getCause();
-                }
-            });
+            if(lCategories.size() > 0) {
+                String lPrefix = lCategories.get(0).getIcon().getPrefix();
+                String lSuffix = lCategories.get(0).getIcon().getSuffix();
 
+                FourSquareWebService.getInstance().fetchImage(lPrefix, lSuffix).enqueue(
+                        new Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                if (response.isSuccessful() && response.body() != null) {
+                                    // display the image data in a ImageView or save it
+                                    Bitmap bm = BitmapFactory.decodeStream(response.body().byteStream());
+                                    mImageViewIcon.setImageBitmap(bm);
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                t.getCause();
+                            }
+                        });
+            }
 
             mCardView.setOnClickListener(v -> {
                 Intent i = VenueDetailsActivity.newIntent(v.getContext(), pVenue);

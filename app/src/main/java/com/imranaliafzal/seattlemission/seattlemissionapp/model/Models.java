@@ -141,7 +141,7 @@ public class Models implements Serializable{
         Contact contact;
         Boolean verified;
         String referralId;
-        Boolean hasPark;
+        Boolean hasPerk;
         List<VenueChain> venueChains;
         List<Category> categories;
         Stats stats;
@@ -150,7 +150,7 @@ public class Models implements Serializable{
         String canonicalUrl;
         String url;
         Price price;
-        List<Likes> likes;
+        Likes likes;
         Boolean dislike;
         Boolean ok;
         String rating;
@@ -211,6 +211,17 @@ public class Models implements Serializable{
     @Value
     public  class SingleVenueDetailResponse{
         Venue venue;
+    }
+
+    @Value
+    public class VenueSuggest{
+        Meta meta;
+        VenueSuggestResponse response;
+    }
+
+    @Value
+    public class VenueSuggestResponse{
+        List<Venue> minivenues;
     }
 
 }
